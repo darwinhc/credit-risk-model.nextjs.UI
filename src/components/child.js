@@ -66,7 +66,7 @@ const Child = ({ setPrediction }) => {
                     required
                 />
 
-                <Form.Label>out_prncp</Form.Label>
+                <Form.Label>Remaining outstanding principal for total amount funded</Form.Label>
                 <Form.Control
                     className="mb-3"
                     onChange={(e) => {

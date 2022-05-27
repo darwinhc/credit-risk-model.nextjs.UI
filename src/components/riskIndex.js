@@ -22,8 +22,8 @@ const RiskIndex = ({ prediction }) => {
                     />
                 </div>
                 <div>
-                    <p>Usted es de {(100*(684+1-prediction)/(684-554)).toFixed(2)}% de personas</p>
-                    <p>{prediction>= 600 ? "Se le otorga el credito" : "No se le otorga credito"}</p>
+                    <p>You are in the top {(100*(684+1-prediction)/(684-554)).toFixed(2)}% of people most likely to be approved for credit.</p>
+                    <p>{prediction>= 600 ? "Credit is granted" : "No credit granted"}</p>
                 </div>
             </div>
         </div>
