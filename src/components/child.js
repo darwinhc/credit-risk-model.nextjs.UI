@@ -4,98 +4,75 @@ import { Form, Button } from "react-bootstrap";
 
 const Child = ({ setPrediction }) => {
     const [values, setValues_] = useState({
-        grade: "",
-        sub_grade: "",
+        sub_grade_1: "",
+        sub_grade_2: "",
         int_rate: "",
-        mths_since_issue_d: "",
-        mths_since_last_pymnt_d: "",
-        mths_difference_payments: ""
+        out_prncp: ""
     });
     const setValue = (key, value) => setValues_({ ...values, [key]: value });
     const predict = async () => {
-        console.log(values);
+        let to_send = {int_rate: values.int_rate, out_prncp: values.out_prncp, 
+            sub_grade: values.sub_grade_1+values.sub_grade_2}
+        console.log(to_send);
         const res = await axios.post(
             "https://modelo-riesgo-crediticio.herokuapp.com/",
-            values
+            // "http://localhost:8000/",
+            to_send
         );
         setPrediction(res.data.prediction);
     };
     return (
         <div className="flex-1 col mx-auto px-5">
             <h1 className="my-4">Formulario de riesgo crediticio</h1>
-            <Form className="">
-                <Form.Label>LC assigned loan grade</Form.Label>
-                <Form.Control
-                    className="mb-3"
-                    onChange={(e) => {
-                        setValue("grade", e.target.value);
-                    }}
-                    value={values.grade}
-                    type="number"
-                    placeholder="LC assigned loan grade"
-                    required
-                />
-                
+            <Form className="">                
 
                 <Form.Label>LC assigned loan subgrade</Form.Label>
-                <Form.Control
-                    className="mb-3"
-                    onChange={(e) => {
-                        setValue("sub_grade", e.target.value);
-                    }}
-                    value={values.sub_grade}
-                    type="number"
-                    placeholder="LC assigned loan subgrade"
-                    required
-                />
-                
+                <div className="row">
+                    <Form.Control
+                        className="mb-3 col w-25"
+                        onChange={(e) => {
+                            setValue("sub_grade_1", e.target.value);
+                        }}
+                        value={values.sub_grade}
+                        type="text"
+                        placeholder="Subgrade letter"
+                        required
+                    />
+                    <Form.Control
+                        className="mb-3 col w-25"
+                        onChange={(e) => {
+                            setValue("sub_grade_2", e.target.value);
+                        }}
+                        value={values.sub_grade}
+                        type="number"
+                        min={1}
+                        max={5}
+                        placeholder="Subgrade number"
+                        required
+                    />
+                </div>
 
                 <Form.Label>Interest Rate on the loan</Form.Label>
                 <Form.Control
                     className="mb-3"
                     onChange={(e) => {
-                        setValue("int_rate", e.target.value);
+                        setValue("int_rate", parseFloat(e.target.value));
                     }}
                     value={values.int_rate}
                     type="number"
                     placeholder="Interest Rate on the loan"
                     required
                 />
-                
 
-                <Form.Label>Meses desde el asunto</Form.Label>
+                <Form.Label>out_prncp</Form.Label>
                 <Form.Control
                     className="mb-3"
                     onChange={(e) => {
-                        setValue("mths_since_issue_d", e.target.value);
+                        setValue("out_prncp", parseFloat(e.target.value));
                     }}
-                    value={values.mths_since_issue_d}
+                    value={values.out_prncp}
                     type="number"
-                    placeholder="Meses desde el asunto"
-                    required
-                />
-
-                <Form.Label>Meses desde el último pago</Form.Label>
-                <Form.Control
-                    className="mb-3"
-                    onChange={(e) => {
-                        setValue("mths_since_last_pymnt_d", e.target.value);
-                    }}
-                    value={values.mths_since_last_pymnt_d}
-                    type="number"
-                    placeholder="Meses desde el último pago"
-                    required
-                />
-                
-                <Form.Label>Meses de diferencia entre pagos</Form.Label>
-                <Form.Control
-                    className="mb-3"
-                    onChange={(e) => {
-                        setValue("mths_difference_payments", e.target.value);
-                    }}
-                    value={values.mths_difference_payments}
-                    type="number"
-                    placeholder="Meses de diferencia entre pagos"
+                    placeholder="out_prncp"
                     required
                 />
                 
