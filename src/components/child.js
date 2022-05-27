@@ -23,7 +23,7 @@ const Child = ({ setPrediction }) => {
     };
     return (
         <div className="flex-1 col mx-auto px-5">
-            <h1 className="my-4">Formulario de riesgo crediticio</h1>
+            <h1 className="my-4">Credit Risk Form</h1>
             <Form className="">                
 
                 <Form.Label>LC assigned loan subgrade</Form.Label>
