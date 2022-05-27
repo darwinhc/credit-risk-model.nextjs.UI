@@ -84,7 +84,7 @@ const Child = ({ setPrediction }) => {
                         variant="primary"
                         onClick={() => predict()}
                     >
-                        Predecir
+                        Predict
                     </Button>
                 </div>
             </Form>
