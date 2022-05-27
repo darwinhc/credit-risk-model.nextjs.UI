@@ -4,7 +4,7 @@ const RiskIndex = ({ prediction }) => {
     return (
         <div className="flex-1 col">
             <div className="mt-5 p-5 my-auto">
-                <p className="text-justify">Es un valor numérico que representa la solvencia de un individuo. Todas las instituciones de crédito, como los bancos, tienen complejos modelos de crédito que utilizan la información contenida en la solicitud, como el salario, los compromisos crediticios y el rendimiento de los préstamos anteriores, para determinar la puntuación de crédito de una solicitud o de un cliente existente. El modelo produce una puntuación que representa la probabilidad de que el prestamista reciba el pago a tiempo si concede a una persona un préstamo o una tarjeta de crédito.</p>
+                <p className="text-justify">A credit scorecard is one of such credit models, it is one of the most common credit models due to the fact it is relatively easy to interpret for customers and that it has been around for the last few decades, hence the development process is standard and widely understood. Property, K. T. |. (2022, 30 marzo). Intro to Credit Scorecard - Towards Data Science. Medium. https://towardsdatascience.com/intro-to-credit-scorecard-9afeaaa3725f</p>
                 <div className="mt-5">
                     <Score
                         value={prediction}
@@ -23,6 +23,7 @@ const RiskIndex = ({ prediction }) => {
                 </div>
                 <div>
                     <p>Usted es de {(100*(684+1-prediction)/(684-554)).toFixed(2)}% de personas</p>
+                    <p>{prediction>= 600 ? "Se le otorga el credito" : "No se le otorga credito"}</p>
                 </div>
             </div>
         </div>

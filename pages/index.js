@@ -4,7 +4,7 @@ import RiskIndex from "../src/components/riskIndex";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-    const [prediction, setPrediction] = useState(200);
+    const [prediction, setPrediction] = useState(585);
 
     return (
         <div className={styles.container}>
