@@ -36,10 +36,12 @@ const Child = ({ setPrediction }) => {
                         value={values.sub_grade}
                         type="text"
                         placeholder="Subgrade letter"
+                        maxLength={1}
                         required
                     />
                     <Form.Control
                         className="mb-3 col w-25"
+                        maxLength={1}
                         onChange={(e) => {
                             setValue("sub_grade_2", e.target.value);
                         }}
