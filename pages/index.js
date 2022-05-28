@@ -11,7 +11,7 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <main className="d-flex row">
-                { !loading ? <Loading /> : null}
+                { loading ? <Loading /> : null}
                 <Child prediction={prediction} setPrediction={setPrediction} setLoading={setLoading}/>
                 <RiskIndex prediction={prediction} loading={loading}/>
             </main>
