@@ -26,7 +26,7 @@ const RiskIndex = ({ prediction }) => {
                         </div>
                         <div>
                             <p>You are in the top {(100*(684+1-prediction)/(684-554)).toFixed(2)}% of people most likely to be approved for credit.</p>
-                            <p>{prediction>= 600 ? "Credit is granted" : "No credit granted"}</p>
+                            <p style={{fontWeight: "bold"}}>{prediction>= 600 ? "Credit is granted" : "No credit granted"}</p>
                         </div>
                     </>
                 )}
