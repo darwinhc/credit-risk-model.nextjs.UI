@@ -8,7 +8,7 @@ const limits = {
     sub_grade_2: [1, 5]
 }
 
-const Child = ({ setPrediction }) => {
+const Child = ({ setPrediction, setLoading }) => {
     const [values, setValues_] = useState({
         sub_grade_1: "A",
         sub_grade_2: 1,
@@ -17,7 +17,7 @@ const Child = ({ setPrediction }) => {
     });
     const setValue = (key, value) => setValues_({ ...values, [key]: value });
     const predict = async () => {
-        
+        setLoading(true);
         let to_send = {int_rate: values.int_rate, out_prncp: values.out_prncp, 
             sub_grade: values.sub_grade_1+values.sub_grade_2}
         const res = await axios.post(
@@ -25,6 +25,7 @@ const Child = ({ setPrediction }) => {
             to_send
         );
         setPrediction(res.data.prediction);
+        setLoading(false);
     };
     return (
         <div className="flex-1 col mx-auto px-5">
@@ -42,6 +43,9 @@ const Child = ({ setPrediction }) => {
                         <option value="B">B</option>
                         <option value="C">C</option>
                         <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
                     </Form.Select>
                     <Form.Select
                         className="mb-3 col w-25"
