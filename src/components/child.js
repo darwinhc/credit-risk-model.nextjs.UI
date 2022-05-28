@@ -17,15 +17,24 @@ const Child = ({ setPrediction, setLoading }) => {
     });
     const setValue = (key, value) => setValues_({ ...values, [key]: value });
     const predict = async () => {
-        setLoading(true);
-        let to_send = {int_rate: values.int_rate, out_prncp: values.out_prncp, 
-            sub_grade: values.sub_grade_1+values.sub_grade_2}
-        const res = await axios.post(
-            "https://modelo-riesgo-crediticio.herokuapp.com/",
-            to_send
-        );
-        setPrediction(res.data.prediction);
-        setLoading(false);
+        if(values.int_rate === "" || values.out_prncp === ""){
+            alert("There are fields to be filled in")
+        }else{
+            setLoading(true);
+            
+            try{
+                let to_send = {int_rate: values.int_rate, out_prncp: values.out_prncp, 
+                    sub_grade: values.sub_grade_1+values.sub_grade_2}
+                const res = await axios.post(
+                    "https://modelo-riesgo-crediticio.herokuapp.com/",
+                    to_send
+                );
+                setPrediction(res.data.prediction);
+            } catch (e){
+                alert("An error has occurred with the prediction")
+            }
+            setLoading(false);
+        }
     };
     return (
         <div className="flex-1 col mx-auto px-5">

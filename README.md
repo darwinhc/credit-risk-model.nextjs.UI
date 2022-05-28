@@ -1,6 +1,6 @@
 
 
-# Predictor de satisfacción de vida en adultos mayores y niños
+# Predictor de riesgo crediticio
 
 La aplicación web del modelo de riesgo crediticio de una persona permite obtener un indicador sobre el riesgo que puede generar prestar dinero a esta persona. No se le presta dinero si este indicador cae por debajo de 600. 
 
