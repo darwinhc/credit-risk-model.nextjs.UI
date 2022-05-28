@@ -8,7 +8,7 @@ const RiskIndex = ({ prediction }) => {
                 { prediction === null ? null : (
                     <>
                         <div className="mt-5">
-                            <p>The cut-off score is 600</p>
+                            <p style={{fontWeight: "bold"}}>The cut-off score is 600</p>
                             <Score
                                 value={prediction}
                                 maxValue={1000}
