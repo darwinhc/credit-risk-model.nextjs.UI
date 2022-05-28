@@ -2,21 +2,26 @@ import axios from "axios";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
+const limits = {
+    int_rate: [0, 100],
+    out_prncp: [-1000, 100000],
+    sub_grade_2: [1, 5]
+}
+
 const Child = ({ setPrediction }) => {
     const [values, setValues_] = useState({
-        sub_grade_1: "",
-        sub_grade_2: "",
+        sub_grade_1: "A",
+        sub_grade_2: 1,
         int_rate: "",
         out_prncp: ""
     });
     const setValue = (key, value) => setValues_({ ...values, [key]: value });
     const predict = async () => {
+        
         let to_send = {int_rate: values.int_rate, out_prncp: values.out_prncp, 
             sub_grade: values.sub_grade_1+values.sub_grade_2}
-        console.log(to_send);
         const res = await axios.post(
             "https://modelo-riesgo-crediticio.herokuapp.com/",
-            // "http://localhost:8000/",
             to_send
         );
         setPrediction(res.data.prediction);
@@ -28,30 +33,29 @@ const Child = ({ setPrediction }) => {
 
                 <Form.Label>LC assigned loan subgrade</Form.Label>
                 <div className="row">
-                    <Form.Control
+                    <Form.Select
                         className="mb-3 col w-25"
-                        onChange={(e) => {
-                            setValue("sub_grade_1", e.target.value);
-                        }}
-                        value={values.sub_grade}
-                        type="text"
-                        placeholder="Subgrade letter"
-                        maxLength={1}
-                        required
-                    />
-                    <Form.Control
+                        onChange={(e) => {setValue("sub_grade_1", e.target.value);}}
+                        value={values.sub_grade_1}
+                    >
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </Form.Select>
+                    <Form.Select
                         className="mb-3 col w-25"
-                        maxLength={1}
                         onChange={(e) => {
                             setValue("sub_grade_2", e.target.value);
                         }}
-                        value={values.sub_grade}
-                        type="number"
-                        min={1}
-                        max={5}
-                        placeholder="Subgrade number"
-                        required
-                    />
+                        value={values.sub_grade_2}
+                    >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </Form.Select>
                 </div>
 
                 <Form.Label>Interest Rate on the loan</Form.Label>
